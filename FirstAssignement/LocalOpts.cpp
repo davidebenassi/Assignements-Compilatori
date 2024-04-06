@@ -1,4 +1,4 @@
-//===-- LocalOpts.cpp - Example Transformations --------------------------===//
+//===------------------------- LocalOpts.cpp ------------------------------===//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 // See https://llvm.org/LICENSE.txt for license information.
@@ -12,6 +12,7 @@
 
 using namespace llvm;
 
+// Find if one of the instruction parameters is a Constant //
 bool getConstantFromInstruction(Instruction &inst, ConstantInt *&C, Value *&Param){
     if (auto *constant = dyn_cast<ConstantInt>(inst.getOperand(0))) {
         C = constant;
@@ -91,7 +92,7 @@ bool algebraicIdentity_stregthReduction(BasicBlock &B) {
 			
 				break;
 			case Instruction::SDiv:
-				// -- Si assume che la costante sia sempre il secondo temrine -- //
+				// It is assumed that in the SDiv instruction the constant is always the second term //
 				if (dyn_cast<ConstantInt>(Inst.getOperand(1))) {
 						C = dyn_cast<ConstantInt>(Inst.getOperand(1));
 						Param = Inst.getOperand(0);
@@ -140,10 +141,10 @@ bool multiInstructionOptimization(BasicBlock &B){
 
 		Instruction::BinaryOps oppositeOpCode = (instructionOpcode==Instruction::Add) ? Instruction::Sub : Instruction::Add;
 
-		// -- Scorriamo tutti gli user della funzione --
+		// -- Loop on all function user -- //
 		for (auto userInst = Inst.user_begin(); userInst != Inst.user_end(); ++userInst) { 
 
-			// -- cast necessario per avere un oggetto di tipo Instruction
+			// -- Necessary cast to Instruction type -- //
 			if (auto *casted = dyn_cast<Instruction>(*userInst)){
 				Instruction &user_instruction = *casted;
 

@@ -17,6 +17,13 @@ _Local optimization passes_
  3. Multi-Instruction Optimization	
     - $a = b + 1, c = a − 1 ⇒ a = b + 1, c = b$
 
+## Run the Optimization Pass
+
+### Files Structure 
+
+### Command Line - Linux
+
+
 ## Contributors
  - Davide Benassi [@davidebenassi]
  - Ivan Giove [@giove29]
