@@ -17,12 +17,14 @@ This folder contains some files to implement the following optimization passes, 
  3. *Multi-Instruction Optimization*	
     - $a = b + 1, c = a − 1 ⇒ a = b + 1, c = b$
 
+
+<!-- TODO: write this section
 ## Run the Optimization Pass
 
 ### Files Structure 
 
 ### Command Line - Linux
-
+-->
 
 ## Contributors
  - Davide Benassi [@davidebenassi]
