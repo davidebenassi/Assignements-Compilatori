@@ -30,7 +30,7 @@ Refering to [this](https://github.com/davidebenassi/llvm17.0.6-Installation?tab=
 **NOTE:** substitute the already present files.
 ### Command Line - Linux
 1. Once you have placed all files correctly move into ```$ROOT/BUILD``` folder.
-2. Compile the optimization tool - ```make opt``
+2. Compile the optimization tool - ```make opt```
 3. Run your pass - ```./bin/opt -p localopts <src_file.ll> -S -o <optimized_file.ll>```
 4. (Optional) Install your pass - ```make install```
 ## Contributors
