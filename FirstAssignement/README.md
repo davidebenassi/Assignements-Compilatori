@@ -17,6 +17,36 @@ This folder contains some files to implement the following optimization passes, 
  3. *Multi-Instruction Optimization*	
     - $a = b + 1, c = a − 1 ⇒ a = b + 1, c = b$
 
+### Dead Code Elimination
+The code performs a primordial implementation of a **Dead Code Elimination** after the three *Local Optimization Passes* described above.
+
+### Known Issue
+This **Dead Code Elimination** only run once. This results in some *Dead Code Instructions* that remains after running the optimization passes.
+
+**Example: Code that show the highlighted problem**
+
+```
+define dso_local i32 @foo(i32 noundef %0, i32 noundef %1) {
+  %3 = sub nsw i32 %1, 2
+  %4 = add nsw i32 %3, 2
+  %5 = mul nsw i32 %4, 2
+  %6 = shl i32 %0, 1
+  %7 = sdiv i32 %5, 4
+  %8 = mul nsw i32 1, %4 
+  ret i32 %7
+}
+```
+**Code After Optimization Passes**
+```
+define dso_local i32 @foo(i32 noundef %0, i32 noundef %1) {
+  %3 = sub nsw i32 %1, 2            ; Dead Code Instruction not eliminated
+  %4 = shl i32 %1, 1
+  %5 = lshr i32 %4, 2
+  ret i32 %5
+}
+
+```
+
 ## Run the Optimization Pass
 
 ### Files Structure 
