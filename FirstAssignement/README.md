@@ -23,7 +23,7 @@ The code performs a primordial implementation of a **Dead Code Elimination** aft
 ### Known Issue
 This **Dead Code Elimination** only run once. This results in some *Dead Code Instructions* that remains after running the optimization passes.
 
-**Example: Code that show the highlighted problem**
+**Example: Code that shows the highlighted problem**
 
 ```
 define dso_local i32 @foo(i32 noundef %0, i32 noundef %1) {
@@ -64,5 +64,5 @@ Refering to [this](https://github.com/davidebenassi/llvm17.0.6-Installation?tab=
 3. Run your pass - ```./bin/opt -p localopts <src_file.ll> -S -o <optimized_file.ll>```
 4. (Optional) Install your pass - ```make install```
 ## Contributors
- - Davide Benassi [@davidebenassi]
- - Ivan Giove [@giove29]
+ - Davide Benassi [[@davidebenassi]](https://github.com/davidebenassi)
+ - Ivan Giove [[@giove29]](https://github.com/giove29)
