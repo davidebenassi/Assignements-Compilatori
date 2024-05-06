@@ -1,6 +1,6 @@
-# Second Assignement
+# Second Assignment
 
-In this theoretical assignement we have 3 DataFlow Analysis problems with their respective Control Flow Graphs.
+In this theoretical assignment we have 3 DataFlow Analysis problems with their respective Control Flow Graphs.
 For each, we are required to make a formalization for the DataFlow Analysis Framework and
 a table with iterations of the iterative algorithm for solving the problem.
 
@@ -88,3 +88,7 @@ Initial Interior Points| $out[b] = U$
 The table shows, at each node of the Control Flow Graph, which variables have a constant value and the value itself.
 
 ![plot](./assets/constant-propagation/itertable.png)
+
+## Contributors
+ - Davide Benassi [[@davidebenassi]](https://github.com/davidebenassi)
+ - Ivan Giove [[@giove29]](https://github.com/giove29)

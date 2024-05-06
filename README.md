@@ -1,8 +1,8 @@
-# Assignements-Compilatori
-Repository containing the assignements of "Linguaggi e Compilatori" course, IT Science, UNIMORE 
+# Assignments-Compilatori
+Repository containing the assignments of "Linguaggi e Compilatori" course, IT Science, UNIMORE 
 
 ## Folder Structure
-All the Assignements will follow this folder structure.
+All the Coding Assignments will follow this folder structure.
 ```bash
 ROOT -
       |
