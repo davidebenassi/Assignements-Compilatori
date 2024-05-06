@@ -4,9 +4,9 @@ In this theoretical assignment we have 3 DataFlow Analysis problems with their r
 For each, we are required to make a formalization for the DataFlow Analysis Framework and
 a table with iterations of the iterative algorithm for solving the problem.
 
-_Formalization Table Example_ \
-\
-![plot](./assets/form-example.png)
+_Formalization Table Example_ 
+
+<p> <img src="./assets/form-example.png" / > </p>
 
 ---
 
@@ -15,9 +15,8 @@ _Formalization Table Example_ \
 **Very Busy Expression:** An expression _a+b_ is very busy at a point _p_ if _a+b_ is evaluated in all paths from _p_ to _EXIT_ and there is no definition of _a_ or _b_ along those paths.
 
 ### Control Flow Graph
-The request is to find the _very busy expressions_ at the indicated point\
-\
-![plot](./assets/very-busy-exp/cfg.png)
+The request is to find the _very busy expressions_ at the indicated point
+<p> <img src="./assets/very-busy-exp/cfg.png" / > </p>
 
 ### Formalization Table
 ||Very Busy Expressions
@@ -30,7 +29,7 @@ Boundary Condition| $in[exit] = \emptyset$
 Initial Interior Points| $in[b] = U$
 
 ### Iterations Table
-![plot](./assets/very-busy-exp/itertable.png)
+<p> <img src="./assets/very-busy-exp/itertable.png" / > </p>
 
 **The espression $b-a$ is the _very busy expression_ at the point $P$ in the Control Flow Graph**
 
@@ -44,7 +43,7 @@ By definition, a node dominates itself.
 ### Control Flow Graph
 The request is to find $DOM[F]$ \
 \
-![plot](./assets/dominator-analysis/cfg.png)
+<p> <img src="./assets/dominator-analysis/cfg.png" / > </p>
 
 
 ### Formalization Table
@@ -58,7 +57,7 @@ Boundary Condition| $out[entry] = entry$
 Initial Interior Points| $out[b] = U$
  
 ### Iterations Table
-![plot](./assets/dominator-analysis/itertable.png)
+<p> <img src="./assets/dominator-analysis/itertable.png" / > </p>
 
 **From the iterations table we can see that $DOM[F]={A, C, F}$**
 
@@ -72,7 +71,7 @@ If at node _n_ we have that _x_ has constant value _c_, it means that _x_ is gua
 variables whose constant value is known.
 
 ### Control Flow Graph
-![plot](./assets/constant-propagation/cfg.png)
+<p> <img src="./assets/constant-propagation/cfg.png" / > </p>
 
 ### Formalization Table
 ||Constant Propagation
@@ -88,7 +87,7 @@ Initial Interior Points| $out[b] = U$
 
 The table shows, at each node of the Control Flow Graph, which variables have a constant value and the value itself.
 
-![plot](./assets/constant-propagation/itertable.png)
+<p> <img src="./assets/constant-propagation/itertable.png" / > </p>
 
 ## Contributors
  - Davide Benassi [[@davidebenassi]](https://github.com/davidebenassi)
