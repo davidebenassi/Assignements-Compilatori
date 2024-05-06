@@ -46,6 +46,7 @@ The request is to find $DOM[F]$ \
 \
 ![plot](./assets/dominator-analysis/cfg.png)
 
+
 ### Formalization Table
 ||Dominator Analysis
 ---|:---:
