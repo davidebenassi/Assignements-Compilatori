@@ -24,7 +24,7 @@ The request is to find the _very busy expressions_ at the indicated point\
 ---|:---:
 Domain| Sets of Expressions
 Direction| Backward: <br> $in[b]=f_b(out[b])$ <br> $out[b]=\land \ in[succ(b)]$
-Tranfer Function| $f_b(x)=Def_b \ \cup \ (x-Use_b) $
+Tranfer Function| $f_b(x)=Gen_b \ \cup \ (x-Kill_b) $
 Meet Operation ($\land$)| $\cap$
 Boundary Condition| $in[exit] = \emptyset$
 Initial Interior Points| $in[b] = U$
@@ -53,7 +53,7 @@ Domain| Sets of BasicBlocks
 Direction| Forward: <br> $out[b]=f_b(in[b])$ <br> $in[b]=\land \ out[pred(b)]$
 Tranfer Function| $f_b(x)=Gen_b \ \cup \ x $
 Meet Operation ($\land$)| $\cap$
-Boundary Condition| $out[entry] = \emptyset$
+Boundary Condition| $out[entry] = entry$
 Initial Interior Points| $out[b] = U$
  
 ### Iterations Table
