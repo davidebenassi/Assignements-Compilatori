@@ -1,6 +1,6 @@
 # First Assignment
 
-This folder contains some files to implement the following optimization passes, tested for LLVM 17.0.1.
+This folder contains some files to implement the following optimization passes, tested for LLVM 17.0.6.
 
 ## Passes
 
