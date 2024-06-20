@@ -41,8 +41,7 @@ Initial Interior Points| $in[b] = U$
 By definition, a node dominates itself.
 
 ### Control Flow Graph
-The request is to find $DOM[F]$ \
-\
+The request is to find $DOM[F]$ 
 <p> <img src="./assets/dominator-analysis/cfg.png" / > </p>
 
 
