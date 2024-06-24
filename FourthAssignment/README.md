@@ -3,6 +3,17 @@
 This folder contains some files to implement the Loop Fusion optimization pass, tested for LLVM 17.0.6.
 
 ## Loop Fusion
+Loop fusion is a compiler optimization technique that combines two or more loops into a single loop to improve code efficiency.
+
+### Fusion Conditions
+
+ 1. **Loop1** and **Loop2** must be "adjacent" : there cannot be any statements that execute between the end of Loop1 and the beginning of Loop2.
+ 2. **Loop1** and **Loop2** must iterate the same number of times.
+ 3. **Loop1** and **Loop2** must be "Control Flow Equivalent" : when one loop executes, the other loop also executes.
+ 4. There cannot be any negative distance dependencies between **Loop1** and **Loop2**.
+
+**NOTE**: The fourth features is commented in the code beacause, in LLVM, the Dependence Analisys is very conservative, which makes it very complicated to find two completely independent instructions.
+ 
 
 ## Build the Optimization Pass
 
