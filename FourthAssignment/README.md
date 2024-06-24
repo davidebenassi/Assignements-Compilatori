@@ -12,7 +12,7 @@ Loop fusion is a compiler optimization technique that combines two or more loops
  3. **Loop1** and **Loop2** must be "Control Flow Equivalent" : when one loop executes, the other loop also executes.
  4. There cannot be any negative distance dependencies between **Loop1** and **Loop2**.
 
-**NOTE**: The fourth features is commented in the code beacause, in LLVM, the Dependence Analisys is very conservative, which makes it very complicated to find two completely independent instructions.
+**NOTE**: The fourth features is commented in the code beacause, in LLVM, the Dependence Analysis is very conservative, which makes it very complicated to find two completely independent instructions.
  
 
 ## Build the Optimization Pass
