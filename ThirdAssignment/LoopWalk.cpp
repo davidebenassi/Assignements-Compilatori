@@ -13,9 +13,18 @@
 
 using namespace llvm;
 
+/* Determines if the given Instruction is loop invariant 
+
+  An Instruction is loop invariant if all his operands are:
+    - constant
+    - the reaching definition of the operand is outside the loop
+    - the reaching definition of the operand has been previously marked as loop invariant
+*/
 bool isLoopInvariant(Instruction &inst, std::set <Instruction*> set, Loop &loop){
 
-  // * Instruction Type Check * //
+  /*  Instruction Type Check 
+      This avoids to delete critical instructions.
+  */
   if ( inst.getOpcode() == Instruction::Br || inst.getOpcode() == Instruction::ICmp || isa<PHINode>(inst) )
     return false;
         
@@ -25,7 +34,9 @@ bool isLoopInvariant(Instruction &inst, std::set <Instruction*> set, Loop &loop)
 
     if( Instruction *op_inst = dyn_cast<Instruction>(*op) ){
 
+      /* Check if the instruction definition is inside the loop*/
       if ( loop.contains(op_inst->getParent()) ) {
+        /* if the definition is not loop invariant -> not in the set*/
         if(!set.empty()){
           if ( !set.count(op_inst) )
             return false;
@@ -34,6 +45,11 @@ bool isLoopInvariant(Instruction &inst, std::set <Instruction*> set, Loop &loop)
           return false;
       }
 
+      /*
+      At this point the operand definition is outside the loop or
+      it is inside but it is a loop invariant inst.
+      */
+
       if ( isa<PHINode>(op_inst) )
         return false;
 
@@ -41,6 +57,7 @@ bool isLoopInvariant(Instruction &inst, std::set <Instruction*> set, Loop &loop)
         if ( !set.count(op_inst) )
           return false;
       }
+      
       else
         return false;
     }
@@ -66,7 +83,7 @@ bool isDeadOutsideLoop(Loop &L, Instruction* Inst){
 }
 
 bool dominatesAllLoopExits(DominatorTree &DT, Loop &L, Instruction* Inst){
-  SmallVector<BasicBlock*, 4> ExitBlocks;
+  SmallVector<BasicBlock*> ExitBlocks;
   L.getExitBlocks(ExitBlocks);
 
   BasicBlock *instructionParentBB = Inst->getParent();
