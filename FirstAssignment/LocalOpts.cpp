@@ -12,7 +12,10 @@
 
 using namespace llvm;
 
-// Find if one of the instruction parameters is a Constant //
+/* 
+	Find if one of the instruction parameters is a Constant 
+	Parameters are given by ref. so the function will assign them correctly.
+*/
 bool getConstantFromInstruction(Instruction &inst, ConstantInt *&C, Value *&Param){
     if (auto *constant = dyn_cast<ConstantInt>(inst.getOperand(0))) {
         C = constant;
@@ -163,6 +166,10 @@ bool multiInstructionOptimization(BasicBlock &B){
 	return true;
 }
 
+/* 
+	Iterate on each instruction of the given BasicBlock;
+	If this has 0 uses and is a binary operation it is erased.
+*/
 bool deadCodeElimination(BasicBlock &B){
 
 	auto inst = B.begin();
@@ -182,29 +189,33 @@ bool deadCodeElimination(BasicBlock &B){
 }
 
 
+/* Function that call the 3 implemented optimizations on each Function's BasicBlock*/
 bool runOnFunction(Function &F) {
-  bool Transformed = false;
+  	bool Transformed = false;
 
-  for (auto Iter = F.begin(); Iter != F.end(); ++Iter) {
-    if (algebraicIdentity_stregthReduction(*Iter)) {
-      Transformed = true;
-    }
-	if (multiInstructionOptimization(*Iter)) {
+	/* Iterates on BasicBlocks */
+	for (auto Iter = F.begin(); Iter != F.end(); ++Iter) {
+		if (algebraicIdentity_stregthReduction(*Iter)) {
 		Transformed = true;
+		}
+		if (multiInstructionOptimization(*Iter)) {
+			Transformed = true;
+		}
+
+		if (deadCodeElimination(*Iter)){
+			Transformed = true;
+		}
 	}
 
-	if (deadCodeElimination(*Iter)){
-		Transformed = true;
-	}
-  }
-
-  return Transformed;
+	return Transformed;
 }
 
 PreservedAnalyses LocalOpts::run(Module &M, ModuleAnalysisManager &AM) {
-  for (auto Fiter = M.begin(); Fiter != M.end(); ++Fiter)
-    if (runOnFunction(*Fiter))
-      return PreservedAnalyses::none();
-  
-  return PreservedAnalyses::all();
+
+	/* Iterator on Module Functions */
+	for (auto Fiter = M.begin(); Fiter != M.end(); ++Fiter)
+		if (runOnFunction(*Fiter))
+			return PreservedAnalyses::none();
+	
+	return PreservedAnalyses::all();
 }
