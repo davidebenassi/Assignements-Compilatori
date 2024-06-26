@@ -42,14 +42,14 @@ bool areAdjacent(Loop* l1, Loop* l2) {
 
     BasicBlock *l2EntryBlock = getLoopEntryBlock(l2);
     if (l2EntryBlock == nullptr){
-        errs() << "l2entry nullptr\n";
+        errs() << "L2 Entry is nullptr\n";
         return false;
     }
 
     if (l1->isGuarded()){
         BasicBlock* loopGuard = l1->getLoopPreheader()->getUniquePredecessor();
         if(loopGuard == nullptr){
-            errs() << "loopguard nullptr\n";
+            errs() << "L1 guard is nullptr\n";
             return false;
         }
         
@@ -58,15 +58,13 @@ bool areAdjacent(Loop* l1, Loop* l2) {
                 return true;
         }
         
-        errs() << "l1 guarded fail\n";
         return false;
-
     }
 
     else {
         BasicBlock *l1Exit = l1->getExitBlock();
         if (l1Exit == nullptr){
-            errs() << "l1exit nullptr \n";
+            errs() << "L1 Exit is nullptr \n";
             return false;
 
         }
@@ -75,7 +73,7 @@ bool areAdjacent(Loop* l1, Loop* l2) {
             return true;
     }
 
-    errs() << "not adj\n";
+    errs() << "Loops Not Adjacent\n";
     return false;
 }
 
@@ -86,7 +84,7 @@ bool areCFEquivalent(Loop* l1, Loop* l2, DominatorTree &DT, PostDominatorTree &P
     if (DT.dominates(L1Block, L2PreHeader) && PDT.dominates(L2PreHeader, L1Block))
         return true;
     else{
-        errs() << "not cf equivalent\n";
+        errs() << "Loops are not Control Flow equivalent\n";
         return false;
     }
         
@@ -99,7 +97,7 @@ bool sameTripCount(Loop* l1, Loop* l2, ScalarEvolution &SE) {
     if (l1TripCount == l2TripCount)
         return true;
 
-    errs() << "not same trip count\n";
+    errs() << "Loops do not have the same trip count\n";
     return false;
 }
 
@@ -128,12 +126,9 @@ bool fuseLoop(Loop* l1, Loop* l2, LoopInfo &LI /*, DominatorTree &DT*/) {
 
 
     /* 
-    In caso in cui il body contenga , ad esempio, un if-else, questo potrebbe 
-    creare 2 blocchi che puntano entrambi al latch.
-    Questi 2 sarebbero nella lista dei predecessors e perciò vengono fatti puntare al nuovo body.
-
-    Stesso discorso per i blocchi del body di l2 che puntavano al latch di l2 che ora
-    punteranno al latch di l1
+    In case the body contains , for example, an if-else, this could create 2 blocks that both point to the latch.
+    These 2 would be in the predecessor list and therefore are made to point to the new body.
+    Same for the blocks in the l2 body that pointed to the l2 latch that would now point to the l1 latch
     */
 
     for ( auto *l1BodyBlock : predecessors(l1Latch) ) {
@@ -205,8 +200,8 @@ PreservedAnalyses LoopFusionPass::run(Function &F, FunctionAnalysisManager &AM) 
         fusionOccurred = false;
         loops = getLoops(LI);
         
-        if (loops.size() == 1){
-            outs() << "Only one Loop\n";
+        if (loops.size() < 2){
+            outs() << "Insufficient number of loops\n";
             return PreservedAnalyses::all();
         }
 

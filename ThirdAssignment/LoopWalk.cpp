@@ -52,14 +52,6 @@ bool isLoopInvariant(Instruction &inst, std::set <Instruction*> set, Loop &loop)
 
       if ( isa<PHINode>(op_inst) )
         return false;
-
-      if(!set.empty()){
-        if ( !set.count(op_inst) )
-          return false;
-      }
-      
-      else
-        return false;
     }
     else if ( auto *constant = dyn_cast<ConstantInt>(*op) ){
       continue;
